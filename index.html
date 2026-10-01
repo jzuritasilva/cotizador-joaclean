@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
-    <title>JOACLEAN · Cotizador 3.2</title>
+    <title>JOACLEAN · Cotizador 3.2.1</title>
 
     <!-- ==== PWA — instalable en iPhone "Añadir a pantalla de inicio" + Android ==== -->
     <meta name="theme-color" content="#0A0E1A" media="(prefers-color-scheme: dark)">
@@ -2536,7 +2536,7 @@
                 <img id="header_logo" src="" alt="Joaclean">
             </div>
             <div class="brand-meta-block">
-                <span class="brand-tag">Cotizador · v3.2</span>
+                <span class="brand-tag">Cotizador · v3.2.1</span>
             </div>
         </div>
         <div class="header-actions">
@@ -2657,19 +2657,6 @@
                             <option value="5000">Extrema/biológico · +$5.000</option>
                         </select>
                     </div>
-                </div>
-
-                <!-- Modalidad alfombra -->
-                <div id="modalidad_alfombra_wrap" class="modalidad-callout" style="display:none;">
-                    <label>Modalidad de servicio para esta alfombra <span class="tooltip-trigger" onclick="toggleTooltip('tip_modalidad')" style="border-color: rgba(15,79,138,0.3); color: var(--accent);">?</span></label>
-                    <div id="tip_modalidad" class="tooltip-content"><strong>Modalidades de alfombra:</strong><br><strong>A. Domicilio individual (4 viajes):</strong> Cliente pide solo alfombra. Tú vas, retiras, lavas en tu casa, devuelves. Cobro alto.<br><strong>B. Drop-off (0 viajes):</strong> Cliente trae y retira la alfombra a tu casa. Sin transporte, cobro bajo.<br><strong>C. Híbrido (2 viajes):</strong> Tú retiras y cliente recoge, o viceversa. Cobro intermedio.<br><strong>D. Pack:</strong> Se sugiere automáticamente cuando hay otros servicios en el carrito.</div>
-                    <select id="alfombra_modalidad" class="select-compact" onchange="cargarPreajustes()">
-                        <option value="domicilio">A · Domicilio individual (cobro alto)</option>
-                        <option value="dropoff">B · Drop-off (cliente trae y retira)</option>
-                        <option value="hibrido">C · Híbrido (cobro intermedio)</option>
-                        <option value="pack">D · Pack (con otros servicios)</option>
-                    </select>
-                    <div id="alfombra_sugerencia" class="modalidad-sugerencia" style="display:none;"></div>
                 </div>
 
                 <!-- Detalle vehículo (Punto 2, jul-2026 · tiempo editable por ítem, jul-2026) -->
@@ -2838,13 +2825,13 @@
                         <div id="tip_dt_otro" class="tooltip-content"><strong>Desgaste no vehicular:</strong> herramientas y accesorios HYLA que se desgastan.</div>
                         <div class="desglose-item"><span>Provisión administrativa <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_admin')">?</span></span><span id="dt_admin">$0</span></div>
                         <div id="tip_dt_admin" class="tooltip-content"><strong>Provisión administrativa:</strong> tu tiempo no remunerado en cotizar, agendar, responder mensajes.</div>
-                        <div class="desglose-item"><span>Costo vehicular cobrado <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_veh_cobrado')">?</span></span><span id="dt_veh_cobrado">$0</span></div>
-                        <div id="tip_dt_veh_cobrado" class="tooltip-content"><strong>Costo vehicular cargado al cliente:</strong> es la parte del costo real del vehículo que SÍ estás cobrando, según el % de aterrizaje configurado.</div>
-                        <div class="subsidio"><span><i data-lucide="alert-triangle" class="icon-inline"></i> Subsidio vehicular (no cobrado) <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_veh_subsidio')">?</span></span><span id="dt_veh_subsidio">$0</span></div>
-                        <div id="tip_dt_veh_subsidio" class="tooltip-content"><strong>Subsidio vehicular:</strong> es la parte del costo vehicular real que NO estás cobrando al cliente.</div>
-                        <div class="desglose-subtotal"><span>Subtotal C (lo cargado)</span><span id="dt_subtotal_c">$0</span></div>
+                        <div class="desglose-item"><span>Costo vehicular real <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_veh_cobrado')">?</span></span><span id="dt_veh_cobrado">$0</span></div>
+                        <div id="tip_dt_veh_cobrado" class="tooltip-content"><strong>Costo vehicular real:</strong> costo del vehículo para todas las idas y vueltas de la cotización, sin bencina. Se incluye completo en el costo interno.</div>
+                        <div class="subsidio"><span><i data-lucide="alert-triangle" class="icon-inline"></i> Subsidio operativo absorbido <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_veh_subsidio')">?</span></span><span id="dt_veh_subsidio">$0</span></div>
+                        <div id="tip_dt_veh_subsidio" class="tooltip-content"><strong>Subsidio operativo:</strong> diferencia positiva entre el costo real completo de visita y lo cobrado. Incluye los gastos generales absorbidos cuando no hay cargo de visita; no se suma otra vez al costo.</div>
+                        <div class="desglose-subtotal"><span>Subtotal C (costo real)</span><span id="dt_subtotal_c">$0</span></div>
                         <div class="desglose-item pl-highlight"><span><i data-lucide="map-pin" class="icon-inline"></i> Costo real de la visita <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_costo_visita_real')">?</span></span><span id="dt_costo_visita_real">$0</span></div>
-                        <div id="tip_dt_costo_visita_real" class="tooltip-content"><strong>Costo real de la visita:</strong> lo que verdaderamente te cuesta llegar al domicilio del cliente.</div>
+                        <div id="tip_dt_costo_visita_real" class="tooltip-content"><strong>Costo real de la visita:</strong> costo de todas las idas y vueltas, peajes y gastos generales del pedido.</div>
                         <div class="desglose-item pl-highlight"><span><i data-lucide="map-pin" class="icon-inline"></i> Cargo cobrado al cliente <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_visita_cobrada')">?</span></span><span id="dt_visita_cobrada">$0</span></div>
                         <div id="tip_dt_visita_cobrada" class="tooltip-content"><strong>Cargo cobrado al cliente:</strong> el monto comercial que el cliente paga por el cargo de visita.</div>
                         <div id="dt_alerta_subsidio_visita" class="subsidio" style="display:none; background:var(--danger-soft); color:var(--danger); border-color:rgba(220,38,38,0.30);"><span><i data-lucide="alert-triangle" class="icon-inline"></i> Subsidio en visita: cobras menos que tu costo <span class="tooltip-trigger" onclick="toggleTooltip('tip_dt_subsidio_visita')">?</span></span><span id="dt_subsidio_visita_monto">$0</span></div>
@@ -2994,9 +2981,9 @@
                                 <div id="tip_vel" class="tooltip-content"><strong>Velocidad promedio:</strong> en zonas urbanas chilenas con tráfico, asume 40 km/h.</div>
                             </div>
                             <div class="input-group">
-                                <label>Peaje ida+vuelta <span class="tooltip-trigger" onclick="toggleTooltip('tip_peaje')">?</span></label>
+                                <label>Peajes totales del pedido <span class="tooltip-trigger" onclick="toggleTooltip('tip_peaje')">?</span></label>
                                 <input type="number" id="v_peaje" value="0" min="0" oninput="calcularTodo(); guardarConfig()">
-                                <div id="tip_peaje" class="tooltip-content"><strong>Peaje ida y vuelta:</strong> costo total de peajes para llegar al cliente. Default $0 porque la mayoría de servicios en zona base no requieren peaje. Se cobra al cliente al 100%.</div>
+                                <div id="tip_peaje" class="tooltip-content"><strong>Peaje ida y vuelta:</strong> ingresa la suma de los peajes de todas las idas y vueltas de esta cotización. Se añade una sola vez y se cobra al 100%, salvo que decidas no cobrar traslado.</div>
                             </div>
                             <div class="input-group">
                                 <label>Luz propia ($/hr)</label>
@@ -3199,18 +3186,14 @@
                             <div class="input-group">
                                 <label>Visita domicilio <span class="tooltip-trigger" onclick="toggleTooltip('tip_c_visita_dom')">?</span></label>
                                 <input type="number" id="c_visita_domicilio" value="18000" oninput="calcularTodo(); guardarConfig()">
-                                <div id="tip_c_visita_dom" class="tooltip-content"><strong>Cargo modalidad DOMICILIO:</strong> piso comercial específico para alfombras a domicilio individual (4 viajes).</div>
+                                <div id="tip_c_visita_dom" class="tooltip-content"><strong>Cargo modalidad DOMICILIO:</strong> piso comercial para el retiro y la entrega conjuntos de todas las alfombras (2 idas y vueltas). Una visita separada para otros servicios añade el cargo base normal.</div>
                             </div>
                             <div class="input-group">
                                 <label>$/km mod. domic. <span class="tooltip-trigger" onclick="toggleTooltip('tip_c_km_dom')">?</span></label>
                                 <input type="number" id="c_km_extra_domicilio" value="700" oninput="calcularTodo(); guardarConfig()">
                                 <div id="tip_c_km_dom" class="tooltip-content"><strong>Recargo km modalidad domicilio:</strong> $700/km porque la modalidad domicilio implica el doble de viajes.</div>
                             </div>
-                            <div class="input-group">
-                                <label>% viaje pack <span class="tooltip-trigger" onclick="toggleTooltip('tip_c_pack')">?</span></label>
-                                <input type="number" id="c_pack_pct" value="50" min="0" max="100" oninput="calcularTodo(); guardarConfig()">
-                                <div id="tip_c_pack" class="tooltip-content"><strong>% tiempo viaje en despacho pack:</strong> default 50%. Cuando una alfombra está en pack, el viaje de despacho final solo cobra parte del tiempo.</div>
-                            </div>
+                            <input type="hidden" id="c_pack_pct" value="50">
                         </div>
 
                         <!-- Calculadora manual: costo de uso HYLA (Punto 1 solicitado por Joaquín, jul-2026) -->
@@ -3423,11 +3406,32 @@
 
                 <div class="input-group">
                     <div class="range-header">
-                        <span>Aterrizaje vehicular <span class="tooltip-trigger" onclick="toggleTooltip('tip_aterrizaje')">?</span></span>
+                        <span>Aterrizaje de visita <span class="tooltip-trigger" onclick="toggleTooltip('tip_aterrizaje')">?</span></span>
                         <span class="range-pill"><span id="lbl_aterrizaje">70</span>%</span>
                     </div>
                     <input type="range" id="v_aterrizaje" min="0" max="100" value="70" oninput="document.getElementById('lbl_aterrizaje').innerText=this.value; this.style.setProperty('--val', this.value+'%'); calcularTodo(); guardarConfig()" style="--val: 70%;">
-                    <div id="tip_aterrizaje" class="tooltip-content"><strong>Aterrizaje vehicular dinámico:</strong> el porcentaje de los costos vehiculares (mantención, neumáticos, seguro, depreciación) que SE TRASLADAN al precio final del cliente. <br><br><strong>0%</strong> = cliente paga solo el cargo base fijo, tú absorbes todos los costos extra del auto (subsidio total). <br><strong>50%</strong> = cobertura intermedia, transición saludable. <br><strong>100%</strong> = cliente paga el costo real completo del vehículo, sin subsidios. <br><br>El subsidio que tú absorbes queda visible en la radiografía interna.</div>
+                    <div id="tip_aterrizaje" class="tooltip-content"><strong>Aterrizaje de visita:</strong> porcentaje del costo que excede el piso comercial y que se cobra al cliente. El piso y los peajes se suman una sola vez por cotización. Al 100% se cubre el costo real, manteniendo el piso mínimo comercial; al 0% se cobra solo ese piso más peajes.</div>
+                </div>
+
+                <!-- Un único plan de traslado para todos los servicios de esta cotización -->
+                <div class="jc-bloque" id="logistica_cotizacion">
+                    <div class="jc-bloque-titulo">Traslados de esta cotización</div>
+                    <div id="modalidad_alfombra_wrap" style="display:none;">
+                        <label for="alfombra_modalidad">Retiro y entrega de todas las alfombras</label>
+                        <select id="alfombra_modalidad" class="select-compact" onchange="calcularTodo()">
+                            <option value="domicilio">Yo retiro y entrego · 2 idas y vueltas</option>
+                            <option value="hibrido_retiro">Yo retiro; el cliente recoge · 1 ida y vuelta</option>
+                            <option value="hibrido_entrega">El cliente trae; yo entrego · 1 ida y vuelta</option>
+                            <option value="dropoff">El cliente trae y recoge · sin traslado</option>
+                        </select>
+                        <p class="helper-text">Una misma dirección. Todas las alfombras se retiran juntas y se entregan juntas, aunque tengan distintos tamaños.</p>
+                        <label id="logistica_compartir_wrap" class="check-item" style="display:none; margin-top:8px;">
+                            <input type="checkbox" id="logistica_compartir" checked onchange="calcularTodo()">
+                            <span id="logistica_compartir_label">Compartir el retiro con la limpieza a domicilio</span>
+                        </label>
+                        <p id="logistica_compartir_ayuda" class="helper-text" style="display:none;">Desmarca si necesitas una visita separada para limpiar los otros servicios.</p>
+                    </div>
+                    <p id="logistica_resumen" class="helper-text" aria-live="polite" style="margin:8px 0 0;">Agrega servicios para calcular los traslados.</p>
                 </div>
 
                 <!-- Toggle no traslado -->
@@ -3437,7 +3441,7 @@
                         <span>No cobrar traslado en esta cotización</span>
                         <span class="tooltip-trigger" onclick="toggleTooltip('tip_no_traslado')" style="border-color: rgba(217,119,6,0.3); color: var(--warning);">?</span>
                     </label>
-                    <div id="tip_no_traslado" class="tooltip-content"><strong>No cobrar traslado:</strong> útil para clientes recurrentes cercanos, promociones, familiares. Cuando lo activas, el cargo de visita al cliente queda en $0 pero la radiografía sigue mostrando los costos reales del viaje como SUBSIDIO Joaquín. Los gastos generales (EPP, marketing, admin) se siguen cobrando porque el servicio se realiza igual. El peaje también se anula automáticamente.</div>
+                    <div id="tip_no_traslado" class="tooltip-content"><strong>No cobrar traslado:</strong> útil para clientes recurrentes cercanos, promociones, familiares. Cuando lo activas, el cargo de visita al cliente queda en $0 pero la radiografía sigue mostrando los costos reales del viaje como SUBSIDIO Joaquín. Los gastos generales y peajes se mantienen como costos internos, pero también quedan absorbidos al anular este cargo.</div>
                     <div id="alerta_no_traslado" class="toggle-callout-alert" style="display:none;"></div>
                 </div>
 
@@ -3639,6 +3643,7 @@ const logoBase64 = logoBase64Light;
     let carrito = [];
     let chartObj = null;
     let cotizacionEnModal = null;
+    let calculoActual = null;
 
     function f(n) { return '$' + Math.round(n).toLocaleString('es-CL'); }
     function pct(n) { return (Math.round(n * 10) / 10) + '%'; }
@@ -3987,26 +3992,71 @@ const logoBase64 = logoBase64Light;
         vehRecalcularTotal();
     }
 
-    // Maneja visibilidad del selector de modalidad de alfombra y sugerencia automática
-    function manejarVisibilidadAlfombra() {
-        const id = document.getElementById('servicio').value;
-        const wrap = document.getElementById('modalidad_alfombra_wrap');
-        const sugerencia = document.getElementById('alfombra_sugerencia');
-        if (id === 'alfombra') {
-            wrap.style.display = 'block';
-            // Si hay otros servicios en el carrito, sugerir modalidad pack
-            const tieneOtros = carrito.some(it => it.id !== 'alfombra');
-            if (tieneOtros) {
-                document.getElementById('alfombra_modalidad').value = 'pack';
-                sugerencia.style.display = 'block';
-                sugerencia.innerHTML = '🎯 <strong>Modalidad PACK sugerida automáticamente</strong> (hay otros servicios en este pedido). Puedes cambiarla si lo prefieres.';
-            } else {
-                document.getElementById('alfombra_modalidad').value = 'domicilio';
-                sugerencia.style.display = 'none';
-            }
-        } else {
-            wrap.style.display = 'none';
+    // Logística por cotización: una ruta compartida, nunca un recargo por fila.
+    function leerLogistica() {
+        return {
+            modalidad: document.getElementById('alfombra_modalidad').value,
+            compartir: document.getElementById('logistica_compartir').checked
+        };
+    }
+
+    function obtenerLogisticaCotizacion(items = carrito, opciones = leerLogistica()) {
+        const alfombras = items.filter(it => it.id === 'alfombra');
+        const hayAlfombras = alfombras.length > 0;
+        const hayOtros = items.some(it => it.id !== 'alfombra');
+        const modos = ['domicilio', 'hibrido_retiro', 'hibrido_entrega', 'dropoff'];
+        const modalidad = modos.includes(opciones.modalidad) ? opciones.modalidad : 'domicilio';
+        const compartir = opciones.compartir !== false;
+        const visitasAlfombra = !hayAlfombras || modalidad === 'dropoff' ? 0 : (modalidad === 'domicilio' ? 2 : 1);
+        const visitaServicioExtra = hayOtros && !(visitasAlfombra > 0 && compartir) ? 1 : 0;
+        const idasVueltas = visitasAlfombra + visitaServicioExtra;
+        let detalle = '';
+        if (hayAlfombras) {
+            if (modalidad === 'domicilio') detalle = 'Retiro conjunto y entrega conjunta de las alfombras.';
+            if (modalidad === 'hibrido_retiro') detalle = 'Retiro conjunto; el cliente recoge las alfombras en el taller.';
+            if (modalidad === 'hibrido_entrega') detalle = 'El cliente trae las alfombras al taller; entrega conjunta a domicilio.';
+            if (modalidad === 'dropoff') detalle = 'El cliente trae y recoge todas las alfombras en el taller.';
         }
+        if (hayOtros) {
+            detalle += (detalle ? ' ' : '') + (visitasAlfombra && compartir
+                ? (modalidad === 'hibrido_entrega' ? 'La entrega' : 'El retiro') + ' se comparte con la limpieza a domicilio.'
+                : 'Una visita para la limpieza a domicilio.');
+        }
+        const resumen = items.length ? idasVueltas + (idasVueltas === 1 ? ' ida y vuelta' : ' idas y vueltas') + ' para todo el pedido. ' + detalle : 'Agrega servicios para calcular los traslados.';
+        return { modalidad, compartir, hayAlfombras, hayOtros, visitasAlfombra, idasVueltas, detalle, resumen };
+    }
+
+    function manejarVisibilidadAlfombra() {
+        const plan = obtenerLogisticaCotizacion();
+        document.getElementById('modalidad_alfombra_wrap').style.display = plan.hayAlfombras || document.getElementById('servicio').value === 'alfombra' ? 'block' : 'none';
+        const compartirVisible = plan.hayOtros && plan.hayAlfombras && plan.visitasAlfombra > 0;
+        document.getElementById('logistica_compartir_wrap').style.display = compartirVisible ? 'flex' : 'none';
+        document.getElementById('logistica_compartir_ayuda').style.display = compartirVisible ? 'block' : 'none';
+        document.getElementById('logistica_compartir_label').textContent = plan.modalidad === 'hibrido_entrega'
+            ? 'Compartir la entrega con la limpieza a domicilio'
+            : 'Compartir el retiro con la limpieza a domicilio';
+        const distancia = Math.max(0, parseFloat(document.getElementById('v_dist').value) || 0);
+        document.getElementById('logistica_resumen').textContent = plan.resumen + (carrito.length ? ' Recorrido total: ' + (2 * distancia * plan.idasVueltas).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' km.' : '');
+    }
+
+    function restaurarLogisticaCotizacion(cot) {
+        let opciones = cot.logistica;
+        let aviso = '';
+        if (!opciones) {
+            // Compatibilidad: leer sin modificar las cotizaciones antiguas.
+            const alfombras = (cot.carrito_completo || []).filter(it => it.id === 'alfombra');
+            const modalidades = alfombras.map(it => it.modalidad || 'domicilio');
+            const modalidad = modalidades.some(m => m === 'domicilio' || m === 'pack') ? 'domicilio'
+                : modalidades.some(m => m === 'hibrido' || m === 'hibrido_retiro') ? 'hibrido_retiro'
+                : modalidades.includes('hibrido_entrega') ? 'hibrido_entrega' : 'dropoff';
+            opciones = {modalidad: alfombras.length ? modalidad : 'domicilio', compartir: true};
+            if (alfombras.length) aviso = '\nCotización antigua: revisa la modalidad de retiro y entrega. Se recalculó el transporte agrupado; el registro original no se modifica.';
+        }
+        document.getElementById('alfombra_modalidad').value = opciones.modalidad;
+        document.getElementById('logistica_compartir').checked = opciones.compartir !== false;
+        if ('noCobrar' in opciones) document.getElementById('v_no_traslado').checked = opciones.noCobrar;
+        if ('peajes' in opciones) document.getElementById('v_peaje').value = opciones.peajes;
+        return aviso;
     }
 
     document.getElementById('chk_det').addEventListener('change', function() {
@@ -4055,15 +4105,10 @@ const logoBase64 = logoBase64Light;
             unidadTxt: unidadItem
         };
 
-        // Si es alfombra, capturar modalidad
-        if (id === 'alfombra') {
-            item.modalidad = document.getElementById('alfombra_modalidad').value;
-        }
+        // La modalidad pertenece a toda la cotización; el ítem conserva solo su limpieza.
 
         carrito.push(item);
 
-        // Si recién agregamos algo que no es alfombra, y luego hay alfombras en el carrito, podríamos sugerir actualizar
-        // Por ahora no hacemos nada automático tras agregar; el usuario decide.
 
         manejarVisibilidadAlfombra();
         manejarVisibilidadVehiculo();
@@ -4093,6 +4138,7 @@ const logoBase64 = logoBase64Light;
         // (no afectan el resto del cálculo, solo refrescan su propio resultado en pantalla)
         actualizarCalcDepreciacion();
         actualizarCalcHYLA();
+        manejarVisibilidadAlfombra();
 
         // Lectura de constantes editables
         const VALOR_HORA = parseFloat(document.getElementById('c_valor_hora').value) || 6500;
@@ -4113,7 +4159,7 @@ const logoBase64 = logoBase64Light;
             return HYLA_AMORT + (horas - HYLA_HORAS_BASE) * HYLA_HORA_EXTRA;
         }
 
-        const dist = parseFloat(document.getElementById('v_dist').value) || 0;
+        const dist = Math.max(0, parseFloat(document.getElementById('v_dist').value) || 0);
         const benc = parseFloat(document.getElementById('v_benc').value) || 0;
         const rend = parseFloat(document.getElementById('v_rend').value) || 10;
         const vel = parseFloat(document.getElementById('v_vel').value) || 40;
@@ -4160,14 +4206,13 @@ const logoBase64 = logoBase64Light;
         }
 
         // ========== CÁLCULOS DEL VIAJE Y CARGO DE VISITA ==========
-        const km_total = dist * 2; // ida y vuelta
+        const planLogistica = obtenerLogisticaCotizacion();
+        const km_total = dist * 2 * planLogistica.idasVueltas;
         const litros_consumidos = km_total / rend;
         const costo_bencina = litros_consumidos * benc;
         const horas_viaje = km_total / vel;
         const costo_tiempo_viaje = horas_viaje * VALOR_HORA_VIAJE;
         const costo_vh_real_total = costo_vh_km * km_total;
-        const costo_vh_cobrado = costo_vh_real_total * aterrizaje;
-        const costo_vh_subsidio = costo_vh_real_total - costo_vh_cobrado;
 
         // Recargo por km sobre 15
         const km_extra = Math.max(0, dist - 15);
@@ -4198,16 +4243,7 @@ const logoBase64 = logoBase64Light;
             let etiquetas = "";
             if (!item.chk_det && !item.chk_suav) etiquetas += `<span class="badge seco">Seco</span> `;
             if (item.chk_luz || item.chk_agua) etiquetas += `<span class="badge taller">En Taller</span>`;
-            // Modalidad de alfombra
-            if (item.id === 'alfombra' && item.modalidad) {
-                const modLabels = {
-                    domicilio: '🏠 Domicilio (4 viajes)',
-                    dropoff: '📦 Drop-off',
-                    hibrido: '🔄 Híbrido',
-                    pack: '🎁 Pack'
-                };
-                etiquetas += `<span class="badge" style="background:#dbeafe; color:#1e40af;">${modLabels[item.modalidad] || ''}</span>`;
-            }
+            if (item.id === 'alfombra') etiquetas += '<span class="badge taller">Traslado compartido del pedido</span>';
 
             document.getElementById('cuerpo_tabla').innerHTML += `<tr><td><strong>${item.nombre}</strong><br>${etiquetas}</td><td>${item.cant} ${item.unidadTxt}</td><td style="color:var(--s); font-weight:bold;">${f(precio_item_venta)}</td><td><button class="btn-del" onclick="eliminarItem(${index})">X</button></td></tr>`;
             document.getElementById('lista_servicios_cliente').innerHTML += `<div class="b-item"><span>${item.cant}x ${item.nombre} ${item.chk_det?'':'(Seco)'}</span><span style="font-weight:600;">${f(precio_item_venta)}</span></div>`;
@@ -4215,94 +4251,18 @@ const logoBase64 = logoBase64Light;
 
         const costo_sueldo_op = s_horas_op * VALOR_HORA;
 
-        // ========== COSTO Y PRECIO DE VISITA (v2.3.3 — aterrizaje consistente, sin margen sobre visita) ==========
-        // FILOSOFÍA (Joaquín, mayo 2026): el cargo de visita se cobra al COSTO, sin margen.
-        // La utilidad de Joaclean viene SOLO de los items del servicio.
-        // El aterrizaje se aplica de forma consistente a TODO el costo real de visita
-        // (incluyendo recargos por modalidades de alfombra).
-
-        // Paso 1: calcular costo real total INTERNO de la visita base (1 ida-vuelta)
-        // Peaje: costo directo verificable, se cobra al 100% sin pasar por aterrizaje.
-        const costo_visita_real_base = costo_bencina + costo_tiempo_viaje + costo_vh_real_total + gg_total;
-
-        // Paso 2: detectar modalidades de alfombra y calcular recargos por viajes extra
-        const alfombras = carrito.filter(it => it.id === 'alfombra');
-        const otrosItems = carrito.filter(it => it.id !== 'alfombra');
-        const hayAlfombra = alfombras.length > 0;
-        const hayOtros = otrosItems.length > 0;
-
-        // Constante para % tiempo de viaje en pack
-        const PACK_PCT = (parseFloat(document.getElementById('c_pack_pct').value) || 50) / 100;
-
-        // Caso especial: SOLO drop-off (sin otros servicios) -> NO hay viaje
-        const todasDropoff = hayAlfombra && !hayOtros && alfombras.every(a => a.modalidad === 'dropoff');
-
-        // Recargos extra por modalidades de alfombra (en costo REAL, sin aterrizaje aún)
-        let extra_costo_real_alfombra = 0;
-        if (!todasDropoff) {
-            alfombras.forEach(alf => {
-                const mod = alf.modalidad || 'domicilio';
-                if (mod === 'dropoff') return; // alfombra dropoff con otros: no suma viajes
-                let factor_viaje = 0;
-                let pct_tiempo = 1.0;
-                if (mod === 'pack') {
-                    factor_viaje = 1.0;
-                    pct_tiempo = PACK_PCT;
-                } else if (mod === 'hibrido') {
-                    factor_viaje = 0.5;
-                    pct_tiempo = 0.5;
-                } else if (mod === 'domicilio') {
-                    factor_viaje = 1.0;
-                    pct_tiempo = 1.0;
-                }
-                if (factor_viaje > 0) {
-                    const ex_bencina = (km_total / rend) * benc * factor_viaje;
-                    const ex_tiempo = horas_viaje * VALOR_HORA_VIAJE * factor_viaje * pct_tiempo;
-                    const ex_vh_real = costo_vh_km * km_total * factor_viaje;
-                    extra_costo_real_alfombra += ex_bencina + ex_tiempo + ex_vh_real;
-                }
-            });
-        }
-
-        // Paso 3: COSTO REAL TOTAL de visita (base + recargos modalidad alfombra)
-        let costo_visita_real_total_completo;
-        if (todasDropoff) {
-            // Cliente trae y retira: no hay viaje, solo gastos generales
-            costo_visita_real_total_completo = gg_total;
-        } else {
-            costo_visita_real_total_completo = costo_visita_real_base + extra_costo_real_alfombra;
-        }
-
-        // Paso 4: aplicar fórmula de aterrizaje consistente
-        // cliente_paga = cargo_fijo_base + (costo_real - cargo_fijo_base) × aterrizaje
-        // Cuando aterrizaje=0%, el cliente paga el cargo fijo base (Joaclean absorbe diferencia)
-        // Cuando aterrizaje=100%, el cliente paga el costo real exacto
-
-        // v2.3.4: si hay alguna alfombra modalidad "domicilio", usamos cargo y recargo km especiales
-        // (porque domicilio implica 4 viajes en lugar de 2)
-        const hayDomicilio = alfombras.some(a => a.modalidad === 'domicilio');
-        let cargo_fijo_base;
-        if (hayDomicilio) {
-            // Usar cargo modalidad domicilio + recargo km domicilio
-            cargo_fijo_base = VISITA_BASE_DOM + km_extra * 2 * KM_EXTRA_DOM;
-        } else {
-            // Cargo normal
-            cargo_fijo_base = VISITA_BASE + recargo_km;
-        }
-
-        let precio_visita_final;
-        let costo_visita_interno;
-
-        if (todasDropoff) {
-            // Drop-off puro: no se cobra cargo de visita pero se contabiliza el gasto general
-            precio_visita_final = 0;
-            costo_visita_interno = gg_total;
-        } else {
-            const diferencia_visita = Math.max(0, costo_visita_real_total_completo - cargo_fijo_base);
-            const traslado_aterrizaje = diferencia_visita * aterrizaje;
-            precio_visita_final = cargo_fijo_base + traslado_aterrizaje + peaje;
-            costo_visita_interno = costo_visita_real_total_completo + peaje;
-        }
+        // Costos reales de TODOS los recorridos; gastos generales una sola vez.
+        const sinViajes = planLogistica.idasVueltas === 0;
+        const peaje_total = sinViajes ? 0 : peaje; // El campo ya expresa el total del pedido.
+        const costo_visita_interno = costo_bencina + costo_tiempo_viaje + costo_vh_real_total + gg_total + peaje_total;
+        // Se conservan los pisos comerciales y la fórmula de aterrizaje existentes.
+        // 1 ida/vuelta: base normal; 2: base retiro/entrega; una visita separada añade base normal.
+        const baseNormal = VISITA_BASE + recargo_km;
+        const baseDomicilio = VISITA_BASE_DOM + km_extra * 2 * KM_EXTRA_DOM;
+        const cargo_fijo_base = sinViajes ? 0 : planLogistica.idasVueltas === 1 ? baseNormal
+            : baseDomicilio + Math.max(0, planLogistica.idasVueltas - 2) * baseNormal;
+        let precio_visita_final = sinViajes ? 0
+            : cargo_fijo_base + Math.max(0, costo_visita_interno - peaje_total - cargo_fijo_base) * aterrizaje + peaje_total;
 
         // Paso 5: si NO_TRASLADO está activo, anulamos lo cobrado al cliente
         // pero MANTENEMOS el costo interno (el subsidio queda visible en radiografía)
@@ -4360,11 +4320,11 @@ const logoBase64 = logoBase64Light;
         // ========== ACTUALIZAR UI: DESGLOSE INTERNO ==========
         // Bloque A
         document.getElementById('dt_sueldo_op').innerText = f(costo_sueldo_op);
-        document.getElementById('dt_sueldo_viaje').innerText = f(todasDropoff ? 0 : costo_tiempo_viaje);
-        document.getElementById('dt_bencina').innerText = f(todasDropoff ? 0 : costo_bencina);
-        document.getElementById('dt_peaje').innerText = f(todasDropoff ? 0 : peaje);
+        document.getElementById('dt_sueldo_viaje').innerText = f(costo_tiempo_viaje);
+        document.getElementById('dt_bencina').innerText = f(costo_bencina);
+        document.getElementById('dt_peaje').innerText = f(peaje_total);
         document.getElementById('dt_hyla').innerText = f(s_hyla);
-        const subtotal_a = costo_sueldo_op + (todasDropoff ? 0 : (costo_tiempo_viaje + costo_bencina + peaje)) + s_hyla;
+        const subtotal_a = costo_sueldo_op + (costo_tiempo_viaje + costo_bencina + peaje_total) + s_hyla;
         document.getElementById('dt_subtotal_a').innerText = f(subtotal_a);
 
         // Bloque B
@@ -4375,28 +4335,26 @@ const logoBase64 = logoBase64Light;
         const subtotal_b = s_quim_atom + s_suav + s_cuentas + s_recargo;
         document.getElementById('dt_subtotal_b').innerText = f(subtotal_b);
 
-        // Bloque C
-        // Si es drop-off puro: solo anulamos lo que depende del VIAJE (bencina, tiempo viaje, vehículo).
-        // Los gastos generales (EPP, marketing, desgaste no vehicular, admin) siguen porque
-        // el servicio se realiza igual, solo cambia que el cliente trae y retira.
-        const vh_cobrado_mostrado = todasDropoff ? 0 : (costo_vh_real_total * aterrizaje);
-        const vh_subsidio_mostrado = todasDropoff ? 0 : (costo_vh_real_total * (1 - aterrizaje));
-
+        // Bloque C: costos reales para que A + B + C coincidan con el costo total.
         document.getElementById('dt_epp').innerText = f(gg_epp);
         document.getElementById('dt_mkt').innerText = f(gg_mkt);
         document.getElementById('dt_otro').innerText = f(gg_otro);
         document.getElementById('dt_admin').innerText = f(gg_admin);
-        document.getElementById('dt_veh_cobrado').innerText = f(vh_cobrado_mostrado);
-        document.getElementById('dt_veh_subsidio').innerText = f(vh_subsidio_mostrado);
-        const subtotal_c = gg_total + vh_cobrado_mostrado;
+        document.getElementById('dt_veh_cobrado').innerText = f(costo_vh_real_total);
+        const subtotal_c = gg_total + costo_vh_real_total;
         document.getElementById('dt_subtotal_c').innerText = f(subtotal_c);
 
         // Alerta de subsidio en cargo de visita (real vs cobrado)
         document.getElementById('dt_costo_visita_real').innerText = f(costo_visita_interno);
         document.getElementById('dt_visita_cobrada').innerText = f(precio_visita_final);
-        const subsidio_visita = costo_visita_interno - precio_visita_final;
+        const subsidio_visita = Math.max(0, costo_visita_interno - precio_visita_final);
+        document.getElementById('dt_veh_subsidio').innerText = f(subsidio_visita);
+        calculoActual = {planLogistica, kmTotal: km_total, horasViaje: horas_viaje,
+            precioVisita: precio_visita_final, costoVisita: costo_visita_interno,
+            subtotal: subtotal_cliente, iva, total: gran_total, costo: costo_operativo_total,
+            utilidad: utilidad_pura, subsidio: subsidio_visita, peajes: peaje_total};
         const alertaVisita = document.getElementById('dt_alerta_subsidio_visita');
-        if (subsidio_visita > 0 && !todasDropoff) {
+        if (subsidio_visita > 0) {
             alertaVisita.style.display = 'block';
             document.getElementById('dt_subsidio_visita_monto').innerText = f(subsidio_visita);
         } else {
@@ -4424,7 +4382,7 @@ const logoBase64 = logoBase64Light;
 
         // Alerta visible cuando NO_TRASLADO está activo
         const alertaNoTraslado = document.getElementById('alerta_no_traslado');
-        if (NO_TRASLADO && carrito.length > 0 && !todasDropoff) {
+        if (NO_TRASLADO && carrito.length > 0 && !sinViajes) {
             const subsidioRegalado = costo_visita_interno - 0; // todo el costo se subsidia
             alertaNoTraslado.style.display = 'block';
             alertaNoTraslado.innerHTML = `⚠️ <strong>Estás regalando ${f(subsidioRegalado)}</strong> en costos de traslado a este cliente. Asegúrate de que sea decisión consciente.`;
@@ -4433,7 +4391,7 @@ const logoBase64 = logoBase64Light;
         }
 
         // Gráfico
-        dibujarGrafico(costo_sueldo_op + (todasDropoff ? 0 : costo_tiempo_viaje), utilidad_pura, todasDropoff ? 0 : costo_bencina, s_hyla + vh_cobrado_mostrado, s_quim_atom + s_suav + s_cuentas + s_recargo, gg_total);
+        dibujarGrafico(costo_sueldo_op + (costo_tiempo_viaje), utilidad_pura, costo_bencina, s_hyla + costo_vh_real_total, s_quim_atom + s_suav + s_cuentas + s_recargo, gg_total + peaje_total);
     }
 
     function formatearTiempo(horas_decimal) {
@@ -4443,6 +4401,9 @@ const logoBase64 = logoBase64Light;
     }
 
     function limpiarVistas() {
+        calculoActual = null;
+        ['dt_alerta_subsidio_visita', 'alerta_no_traslado'].forEach(id => document.getElementById(id).style.display = 'none');
+        ['dt_costo_visita_real', 'dt_visita_cobrada', 'dt_subsidio_visita_monto'].forEach(id => document.getElementById(id).innerText = '$0');
         const ids = ['r_visita_cliente','r_iva_cliente','r_total_cliente','dt_sueldo_op','dt_sueldo_viaje','dt_bencina','dt_peaje','dt_hyla','dt_subtotal_a','dt_deseng','dt_suav','dt_cuentas','dt_recargo','dt_subtotal_b','dt_epp','dt_mkt','dt_otro','dt_admin','dt_veh_cobrado','dt_veh_subsidio','dt_subtotal_c','dt_costo_total','dt_utilidad','dt_precio_final'];
         ids.forEach(id => document.getElementById(id).innerText = '$0');
         const tEl2 = document.getElementById('dt_tolerancia');
@@ -4460,7 +4421,7 @@ const logoBase64 = logoBase64Light;
         if (chartObj) chartObj.destroy();
         chartObj = new Chart(ctx, {
             type: 'doughnut',
-            data: { labels: ['Sueldo Joaquín', 'Utilidad Joaclean', 'Bencina', 'Máquina + Vehículo', 'Insumos', 'Gastos Grales'], datasets: [{ data: [sueldo, utilidad, bencina, vh_y_maq, insumos, gg], backgroundColor: ['#0284c7', '#16a34a', '#ef4444', '#8b5cf6', '#f59e0b', '#64748b'], borderWidth: 2 }] },
+            data: { labels: ['Sueldo Joaquín', 'Utilidad Joaclean', 'Bencina', 'Máquina + Vehículo', 'Insumos', 'Gastos generales + peajes'], datasets: [{ data: [sueldo, utilidad, bencina, vh_y_maq, insumos, gg], backgroundColor: ['#0284c7', '#16a34a', '#ef4444', '#8b5cf6', '#f59e0b', '#64748b'], borderWidth: 2 }] },
             options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } }, cutout: '65%' }
         });
     }
@@ -4498,13 +4459,14 @@ const logoBase64 = logoBase64Light;
     async function guardarCotizacion() {
         if (carrito.length === 0) { alert("Agrega al menos un servicio antes de guardar."); return; }
 
+        calcularTodo();
         const cliente = document.getElementById('cliente_nombre').value || 'Sin nombre';
         const fecha = new Date().toISOString();
-        const total = parseInt(document.getElementById('dt_precio_final').innerText.replace(/\D/g, ''));
-        const costo = parseInt(document.getElementById('dt_costo_total').innerText.replace(/\D/g, ''));
-        const utilidad = parseInt(document.getElementById('dt_utilidad').innerText.replace(/\D/g, ''));
-        const subsidio = parseInt(document.getElementById('dt_veh_subsidio').innerText.replace(/\D/g, ''));
-        const dist = parseFloat(document.getElementById('v_dist').value) || 0;
+        const total = Math.round(calculoActual.total);
+        const costo = Math.round(calculoActual.costo);
+        const utilidad = Math.round(calculoActual.utilidad);
+        const subsidio = Math.round(calculoActual.subsidio);
+        const dist = Math.max(0, parseFloat(document.getElementById('v_dist').value) || 0);
         const margenVenta = document.getElementById('dt_margen_venta').innerText;
 
         // Capturamos el desglose interno completo
@@ -4536,6 +4498,10 @@ const logoBase64 = logoBase64Light;
             distancia_km: dist,
             servicios: carrito.map(it => ({ nombre: it.nombre, cant: it.cant })),
             carrito_completo: JSON.parse(JSON.stringify(carrito)),
+            logistica: {...leerLogistica(), noCobrar: document.getElementById('v_no_traslado').checked,
+                peajes: parseFloat(document.getElementById('v_peaje').value) || 0,
+                idasVueltas: calculoActual.planLogistica.idasVueltas, kmTotal: calculoActual.kmTotal},
+            version_calculo: '3.2.1-logistica', 
             total: total,
             costo: costo,
             utilidad: utilidad,
@@ -4637,6 +4603,7 @@ const logoBase64 = logoBase64Light;
         document.getElementById('modal_contenido').innerHTML = `
             <p style="color: #64748b; margin-top: 0;"><strong>Fecha:</strong> ${fecha} · <strong>Distancia:</strong> ${cot.distancia_km} km</p>
 
+            ${cot.logistica ? `<p style="color:#475569;">Traslados del pedido: ${Number(cot.logistica.idasVueltas)} idas y vueltas · ${Number(cot.logistica.kmTotal)} km.</p>` : ''}
             <h3 style="color: #0f172a; margin-bottom: 8px;">Servicios cotizados</h3>
             <ul style="margin: 0 0 18px 20px;">${servicios}</ul>
 
@@ -4660,7 +4627,7 @@ const logoBase64 = logoBase64Light;
                 <div class="desglose-item"><span>Marketing prorrateado</span><span>${d.mkt || '$0'}</span></div>
                 <div class="desglose-item"><span>Desgaste no vehicular</span><span>${d.otro || '$0'}</span></div>
                 <div class="desglose-item"><span>Provisión administrativa</span><span>${d.admin || '$0'}</span></div>
-                <div class="desglose-item"><span>Costo vehicular cobrado</span><span>${d.veh_cobrado || '$0'}</span></div>
+                <div class="desglose-item"><span>${cot.version_calculo ? 'Costo vehicular real' : 'Costo vehicular cobrado'}</span><span>${d.veh_cobrado || '$0'}</span></div>
 
                 <div class="desglose-titulo">D. Resumen final</div>
                 <div class="desglose-item"><span>Costo real de la visita</span><span>${d.costo_visita_real || '$0'}</span></div>
@@ -4695,11 +4662,12 @@ const logoBase64 = logoBase64Light;
 
         carrito = JSON.parse(JSON.stringify(cot.carrito_completo));
         document.getElementById('cliente_nombre').value = cot.cliente || '';
-        document.getElementById('v_dist').value = cot.distancia_km || 15;
+        document.getElementById('v_dist').value = cot.distancia_km ?? 15;
+        const avisoLogistica = restaurarLogisticaCotizacion(cot);
         guardarConfig();
         calcularTodo();
         cambiarTabDirecto('cotizador');
-        alert(`Cotización cargada al cotizador. Cliente: ${cot.cliente}`);
+        alert(`Cotización cargada al cotizador. Cliente: ${cot.cliente}${avisoLogistica}`);
     }
 
     function cambiarTabDirecto(tab) {
@@ -4914,6 +4882,7 @@ const logoBase64 = logoBase64Light;
     // de página para que el bloque quede entero en la siguiente.
     async function generarPDF(bloquesExternos, soloConstruir) {
         if (carrito.length === 0) { alert("Agrega al menos un servicio."); return; }
+        calcularTodo();
 
         const VALOR_HORA = parseFloat(document.getElementById('c_valor_hora').value) || 6500;
         const VALOR_HORA_VIAJE = parseFloat(document.getElementById('c_valor_hora_viaje').value) || 4200;
@@ -4963,8 +4932,12 @@ const logoBase64 = logoBase64Light;
         const condPago  = valOr('cond_pago', 'Transferencia electrónica una vez finalizado el servicio.');
         const condBanco = valOr('cond_banco');
         const condNotas = valOr('cond_notas');
-        const precio_visita_final_str = document.getElementById('r_visita_cliente').innerText;
-        const precio_visita_final = parseInt(precio_visita_final_str.replace(/\D/g, ''));
+        const precio_visita_final = calculoActual.precioVisita;
+        const planPDF = calculoActual.planLogistica;
+        const soloAlfombras = carrito.every(it => it.id === 'alfombra');
+        const hayAlfombrasPDF = carrito.some(it => it.id === 'alfombra');
+        const encabezadoCantidad = soloAlfombras ? 'SUPERFICIE (m²)' : hayAlfombrasPDF ? 'CANT. / SUPERFICIE' : 'CANT.';
+        const encabezadoUnitario = soloAlfombras ? 'PRECIO / m²' : 'P. UNIT.';
 
         let total_venta_muebles = 0;
         let s_horas_op = 0;
@@ -4981,7 +4954,7 @@ const logoBase64 = logoBase64Light;
             const costo_directo = (item.horas * VALOR_HORA) + amortHYLA(item.horas) + item.comp + c_atom + c_suav + c_luz + c_agua;
             const margenItemPDF = (item.id === 'vehiculo') ? margenVehiculo : margen;
             const precio_venta_item = costo_directo / (1 - margenItemPDF);
-            const precio_unitario = precio_venta_item / Math.max(item.cant, 1);
+            const precio_unitario = precio_venta_item / (item.cant > 0 ? item.cant : 1);
             total_venta_muebles += precio_venta_item;
             s_horas_op += item.horas;
 
@@ -4991,16 +4964,10 @@ const logoBase64 = logoBase64Light;
             } else {
                 proceso = "Sanitización Clínica Ventus (seco)";
             }
-            let modalidadTxt = "";
-            if (item.id === 'alfombra' && item.modalidad) {
-                const labels = {
-                    domicilio: 'Modalidad: Servicio a domicilio (retiro y entrega)',
-                    dropoff: 'Modalidad: Drop-off (cliente trae y retira)',
-                    hibrido: 'Modalidad: Híbrido (un trayecto compartido con cliente)',
-                    pack: 'Modalidad: Pack (incluido en pedido conjunto)'
-                };
-                modalidadTxt = `<br><span style="font-size: 11px; color: #0284c7; font-style: italic;">${labels[item.modalidad] || ''}</span>`;
-            }
+            const modalidadTxt = item.id === 'alfombra'
+                ? '<br><span style="font-size:11px;color:#0284c7;">Limpieza en taller · traslado conjunto detallado al final.</span>' : '';
+            const cantidadPDF = item.cant.toLocaleString('es-CL') + (item.id === 'alfombra' ? ' m²' : '');
+            const unidadPrecioPDF = item.id === 'alfombra' && !soloAlfombras ? ' / m²' : '';
 
             filasTablaHTML += `<tr>
                 <td style="padding: 11px 12px; border-bottom: 1px solid #e2e8f0; color: #0f172a; font-size: 12.5px;">
@@ -5008,8 +4975,8 @@ const logoBase64 = logoBase64Light;
                     <span style="font-size: 11px; color: #64748b;">${proceso}</span>
                     ${modalidadTxt}
                 </td>
-                <td style="padding: 11px 8px; border-bottom: 1px solid #e2e8f0; text-align: center; color: #0f172a; font-size: 13px;">${item.cant}</td>
-                <td style="padding: 11px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; color: #0f172a; font-size: 13px;">${f(precio_unitario)}</td>
+                <td style="padding: 11px 8px; border-bottom: 1px solid #e2e8f0; text-align: center; color: #0f172a; font-size: 13px;">${cantidadPDF}</td>
+                <td style="padding: 11px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; color: #0f172a; font-size: 13px;">${f(precio_unitario)}${unidadPrecioPDF}</td>
                 <td style="padding: 11px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: bold; color: #0f172a; font-size: 13px;">${f(precio_venta_item)}</td>
             </tr>`;
         });
@@ -5113,8 +5080,8 @@ const logoBase64 = logoBase64Light;
                 <thead>
                     <tr>
                         <th style="background-color: #0f172a; color: #ffffff; text-align: left; padding: 11px 12px; font-size: 12px; font-weight: bold;">DESCRIPCIÓN</th>
-                        <th style="background-color: #0f172a; color: #ffffff; text-align: center; padding: 11px 8px; font-size: 12px; font-weight: bold;">CANT.</th>
-                        <th style="background-color: #0f172a; color: #ffffff; text-align: right; padding: 11px 12px; font-size: 12px; font-weight: bold;">P. UNIT.</th>
+                        <th style="background-color: #0f172a; color: #ffffff; text-align: center; padding: 11px 8px; font-size: 12px; font-weight: bold;">${encabezadoCantidad}</th>
+                        <th style="background-color: #0f172a; color: #ffffff; text-align: right; padding: 11px 12px; font-size: 12px; font-weight: bold;">${encabezadoUnitario}</th>
                         <th style="background-color: #0f172a; color: #ffffff; text-align: right; padding: 11px 12px; font-size: 12px; font-weight: bold;">SUBTOTAL</th>
                     </tr>
                 </thead>
@@ -5125,11 +5092,12 @@ const logoBase64 = logoBase64Light;
         const seccionTotales = `
             <div style="background: #f8fafc; padding: 16px 20px; border-radius: 10px; border: 1px solid #e2e8f0; margin-bottom: 20px; color: #0f172a;">
                 <div style="display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; color: #475569;">
-                    <span>Tiempo operativo estimado en sitio:</span>
+                    <span>Tiempo total estimado de limpieza:</span>
                     <span style="font-weight: bold; color: #0284c7; font-size: 14px;">${tiempo_texto}</span>
                 </div>
+                <p style="margin:4px 0 8px;font-size:11px;line-height:1.45;color:#475569;"><strong>Traslados del pedido:</strong> ${planPDF.resumen}</p>
                 ${precio_visita_final > 0 ? `<div style="display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; color: #475569;">
-                    <span>Gastos operativos y traslado:</span>
+                    <span>Gastos operativos y traslado conjunto:</span>
                     <span style="color: #334155;">${f(precio_visita_final)}</span>
                 </div>` : ''}
                 ${iva_on ? `<div style="display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; color: #475569;"><span>Neto:</span><span style="color: #334155;">${f(subtotal)}</span></div>` : ''}
